@@ -9,7 +9,7 @@ This is a simple Todo List application built with vanilla JavaScript. It allows 
 - Remove todo items individually.
 - Sort todo items by date, time, or priority level.
 - Search for todo items by description.
-- Persist todo items across page reloads using sessionStorage.
+- Persist todo items across page reloads using localStorage.
 
 ## Usage
 
