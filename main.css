@@ -1,0 +1,349 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FFD700;
+    overflow: visible;
+}
+
+.navbar {
+    align-items: center;
+    background-color: #1B2631;
+    display: flex;
+    height: 80px;
+    width: 100%;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+    color: #ecf0f1;
+    font-family: "Roboto", sans-serif;
+    margin-left: 20px;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 30px auto 0;
+}
+
+.sort-container select {
+    outline: none;
+}
+
+.search-container,
+.sort-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 10px;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.search-input-wrapper input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    background-color: #f0f0f0;
+    width: 400px;
+}
+
+.search-input-wrapper button {
+    border: none;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.sort-dropdown-wrapper select {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    border: none;
+}
+
+.wrap-sorting-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    color: #1B2631;
+    background-color: #FFD700;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.welcome-section.hidden {
+    display: none;
+}
+
+.welcome-message {
+    margin-top: 20px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #1B2631;
+    font-family: 'Arial', sans-serif;
+}
+
+.center-message {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #1B2631;
+    margin: 100px 0 40vh 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.btn-start-now {
+    background: none;
+    border: none;
+    color: #008080;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.btn-start-now:hover {
+    color: #2F4F4F;
+}
+
+.btn-open-form {
+    margin: 0 20px 20px 0;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 70px;
+    width: 70px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+}
+
+.btn-open-form:hover {
+    background-color: #45a049;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-7px);
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.todo-form {
+    display: grid;
+    gap: 10px;
+}
+
+.todo-form label {
+    font-weight: bold;
+}
+
+.todo-form select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    appearance: none;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml;utf8,<svg fill=\"black\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.todo-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    height: 100px;
+    resize: vertical;
+}
+
+.todo-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.todo-form button:hover {
+    background-color: #45a049;
+}
+
+#closeTodoFormButton {
+    color: #aaa;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+}
+
+#closeTodoFormButton:hover,
+#closeTodoFormButton:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.todo-items {
+    display: grid;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.todo-item-description,
+.todo-item {
+    display: grid;
+    grid-template-columns: 50px 100px 100px 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 20px;
+    border: 1px solid grey;
+    background-color: #2C3E50;
+}
+
+.todo-item-description {
+    border-radius: 5px 5px 0 0;
+    color: #F0E5DE;
+    font-weight: bold;
+}
+
+.todo-item {
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.todo-description {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.todo-item div,
+.todo-item-description div {
+    gap: 20px;
+}
+
+.todo-actions {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.todo-number,
+.todo-time-date,
+.todo-priority,
+.todo-description {
+    color: #F0E5DE;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.todo-edit,
+.todo-done {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    flex-basis: 100px;
+}
+
+.todo-edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.todo-done {
+    background-color: #FF6347;
+    color: white;
+}
+
+.todo-edit:hover {
+    background-color: #45a049;
+}
+
+.todo-done:hover {
+    background-color: #FF4500;
+}
+
+.todo-item-done {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.todo-item-undo {
+    opacity: 1;
+}
+
+.todo-item-remove {
+    transition: opacity 2.5s ease-out;
+    opacity: 0;
+}
+
