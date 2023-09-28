@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="images/logo.svg" rel="icon" type="image/svg+xml"/>
+    <title>Todo App</title>
+    <link href="css/styles.css" rel="stylesheet">
+    <script defer src="js/main.js" type="module"></script>
+</head>
+<body>
+<!-- Navigation bar -->
+<nav class="navbar">
+    <h1>To do app</h1>
+</nav>
+
+<!-- Main content -->
+<main class="main">
+
+    <!-- Search bar -->
+    <div class="controls-container">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input id="searchbox" placeholder="Search items" type="text"/>
+                <button class="search-button">Search</button>
+            </div>
+        </div>
+
+        <!-- Dropdown sorting items -->
+        <div class="sort-container">
+            <div class="sort-dropdown-wrapper">
+                <select class="sort-items-by-type" id="sort-items-by-type">
+                    <option value="date">Sort by Date</option>
+                    <option value="priority">Sort by Priority</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Todo items -->
+    <section class="todo-items">
+    </section>
+
+    <!-- Form for adding new items -->
+    <div class="modal hidden" id="todoFormModal">
+        <div class="modal-content">
+            <span id="closeTodoFormButton">&times;</span>
+            <form class="todo-form">
+                <label for="date">Choose a date:</label>
+                <input id="date" name="date" required type="date">
+
+                <label for="time">Choose a time:</label>
+                <input id="time" name="time" required type="time">
+
+                <label for="priority">Choose a priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <label for="description">Describe the to-do item:</label>
+                <textarea id="description" name="description" required></textarea>
+
+                <button class="btn-add-todo-item">Add Todo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section displayed when no tags are selected -->
+    <div class="welcome-section hidden">
+        <div class="welcome-message">Welcome to your personal To-Do list!</div>
+        <div class="center-message">Looks like you haven't added any tasks yet. Why not
+            <button class="btn-start-now">start now</button>
+            ?
+        </div>
+    </div>
+
+    <!-- Button adding new items -->
+    <div class="btn-open-form" id="openTodoFormButton">
+        <span>&plus;</span>
+    </div>
+</main>
+</body>
+</html>
