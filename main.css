@@ -6,7 +6,11 @@
 
 body {
     background-color: #FFD700;
-    overflow: visible;
+}
+
+html, body {
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -30,8 +34,9 @@ body {
 
 .controls-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
+    align-content: center;
     flex-wrap: wrap;
     max-width: 800px;
     margin: 30px auto 0;
@@ -49,6 +54,10 @@ body {
     margin: 10px;
 }
 
+.search-container {
+    width: 70%;
+}
+
 .search-input-wrapper {
     display: flex;
     align-items: center;
@@ -60,7 +69,7 @@ body {
     padding: 10px;
     border-radius: 5px 0 0 5px;
     background-color: #f0f0f0;
-    width: 400px;
+    width: 100%;
 }
 
 .search-input-wrapper button {
@@ -104,7 +113,7 @@ body {
 
 .welcome-message {
     margin-top: 20px;
-    font-size: 48px;
+    font-size: 2.2em;
     font-weight: bold;
     color: #1B2631;
     font-family: 'Arial', sans-serif;
@@ -114,7 +123,7 @@ body {
     font-size: 20px;
     line-height: 1.5;
     color: #1B2631;
-    margin: 100px 0 40vh 0;
+    margin: 5vh 0 5vh 0;
     text-align: center;
     font-family: 'Arial', sans-serif;
 }
@@ -136,18 +145,24 @@ body {
     color: #2F4F4F;
 }
 
+.btn-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
 .btn-open-form {
     margin: 0 20px 20px 0;
     background-color: #4CAF50;
     border: none;
     border-radius: 50%;
-    bottom: 20px;
-    right: 20px;
+    bottom: 1vh;
+    right: 1vh;
     color: #FFFFFF;
     cursor: pointer;
     height: 70px;
     width: 70px;
-    position: fixed;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -260,10 +275,12 @@ body {
 .todo-item-description,
 .todo-item {
     display: grid;
-    grid-template-columns: 50px 100px 100px 2fr 1fr;
-    gap: 20px;
+    /*grid-template-columns: 1fr 2fr 2fr 3fr 2fr;*/
+    grid-template-columns: minmax(50px, 1.1fr) minmax(50px, 1fr) minmax(70px, 1.5fr) minmax(100px, 4fr) minmax(30px, 1.8fr);
+    gap: 5px;
     align-items: start;
-    padding: 20px;
+    /*justify-items: center;*/
+    padding: 15px;
     border: 1px solid grey;
     background-color: #2C3E50;
 }
@@ -291,6 +308,7 @@ body {
 
 .todo-actions {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
 }
 
@@ -300,7 +318,7 @@ body {
 .todo-description {
     color: #F0E5DE;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1em;
     font-family: Arial, sans-serif;
     line-height: 1.5;
 }
@@ -313,7 +331,8 @@ body {
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
-    flex-basis: 100px;
+    /*flex-basis: 100px;*/
+    flex: 1 0 55px;
 }
 
 .todo-edit {
