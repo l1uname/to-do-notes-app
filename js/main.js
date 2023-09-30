@@ -166,7 +166,7 @@ window.addEventListener('load', () => {
 // Function open modal form
 const openModalForm = () => {
     const currentDate = new Date();
-    const dateString = currentDate.toISOString().substring(0, 10);
+    let dateString = currentDate.toISOString().substring(0, 10);
     const timeString = currentDate.toTimeString().substring(0, 5);
 
     modalForm.classList.remove('hidden');
