@@ -11,7 +11,7 @@
 <body>
 <!-- Navigation bar -->
 <nav class="navbar">
-    <h1>To do app</h1>
+    <h1 class="navbar-title">To do app</h1>
 </nav>
 
 <!-- Main content -->
@@ -21,19 +21,18 @@
     <div class="controls-container">
         <div class="search-container">
             <div class="search-input-wrapper">
-                <input id="searchbox" placeholder="Search items" type="text"/>
+                <input class="search-input" placeholder="Search items" type="text"/>
                 <button class="search-button">Search</button>
             </div>
         </div>
 
         <!-- Dropdown sorting items -->
-        <div class="sort-container">
-            <div class="sort-dropdown-wrapper">
-                <select class="sort-items-by-type" id="sort-items-by-type">
-                    <option value="date">Sort by Date</option>
-                    <option value="priority">Sort by Priority</option>
-                </select>
-            </div>
+        <div class="dropdown">
+            <button class="dropdown-toggle">Sort by Date</button>
+            <ul class="dropdown-menu">
+                <li tabindex="0" data-value="date">Sort by Date</li>
+                <li tabindex="0" data-value="priority">Sort by Priority</li>
+            </ul>
         </div>
     </div>
 
@@ -44,7 +43,7 @@
     <!-- Form for adding new items -->
     <div class="modal hidden" id="todoFormModal">
         <div class="modal-content">
-            <span id="closeTodoFormButton">&times;</span>
+            <span class="btn-close-form">&times;</span>
             <form class="todo-form">
                 <label for="date">Choose a date:</label>
                 <input id="date" name="date" required type="date">

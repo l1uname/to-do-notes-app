@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Build output directories
+dist/
+
+# IDE and editor settings (e.g., WebStorm)
+.idea/
+
+# Package lock file (if you use npm)
+package-lock.json
+
+# npm package files (if you're using npm for package management)
+package.json
+
+# Webpack configuration
+webpack.config.js
+
+# Logs
+*.log
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# TypeScript and JavaScript build artifacts
+*.tsbuildinfo
+*.d.ts
+
+# Coverage directory used by testing tools like Jest or Vitest
+coverage/
+
+# Debugger and IDE-specific files
+.vscode/
+
+# Other unnecessary files
+*.bak
+*.swp
+

@@ -1,3 +1,7 @@
+:root {
+    --focus-color: #3498DB
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,7 +9,7 @@
 }
 
 body {
-    background-color: #FFD700;
+    background-color: #2C3E50;
 }
 
 html, body {
@@ -22,7 +26,7 @@ html, body {
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-.navbar h1 {
+.navbar-title {
     color: #ecf0f1;
     font-family: "Roboto", sans-serif;
     margin-left: 20px;
@@ -34,63 +38,132 @@ html, body {
 
 .controls-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 30px auto 0;
+    width: 100%;
+    gap: 20px;
+    padding: 20px 0;
 }
 
-.sort-container select {
-    outline: none;
-}
-
-.search-container,
-.sort-container {
+.search-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin: 10px;
 }
 
-.search-container {
-    width: 70%;
-}
-
 .search-input-wrapper {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.search-input-wrapper input {
+.search-input {
     flex-grow: 1;
-    border: none;
+    outline: none;
     padding: 10px;
     border-radius: 5px 0 0 5px;
     background-color: #f0f0f0;
-    width: 100%;
+    border: 2px solid transparent;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    box-sizing: border-box;
 }
 
-.search-input-wrapper button {
+.search-input:focus {
+    border-color: var(--focus-color);
+    z-index: 1;
+}
+
+.search-button {
+    position: relative;
+    overflow: hidden;
     border: none;
+    outline: none;
     padding: 10px;
     border-radius: 0 5px 5px 0;
-    background-color: #4CAF50;
+    background-color: #3C5972;
     color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search-button .ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    background-color: #6FA3C8;
+    pointer-events: none;
+}
+
+.search-button:hover {
+    background-color: #4A6A86;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: sans-serif;
+}
+
+.dropdown-toggle {
+    background: #fff;
+    color: #212121;
+    border: 2px solid #34495E;
+    padding: 10px 40px 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 200px;
+    text-align: left;
+    position: relative;
+    border-radius: 5px;
+}
+
+.dropdown-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #34495E;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: #fff;
+    border: 2px solid #34495E;
+    border-top: none;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 10;
+}
+
+.dropdown-menu li {
+    padding: 10px;
     cursor: pointer;
 }
 
-.sort-dropdown-wrapper select {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    border: none;
+.dropdown-menu li:hover {
+    background-color: #e8f0fb;
 }
 
-.wrap-sorting-items {
-    display: flex;
-    flex-direction: column;
+.dropdown.open .dropdown-toggle {
+    border-color: var(--focus-color);
+}
+
+.dropdown.open .dropdown-menu {
+    border-color: var(--focus-color);
+    display: block;
 }
 
 .welcome-section {
@@ -100,8 +173,8 @@ html, body {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    color: #1B2631;
-    background-color: #FFD700;
+    color: #fff;
+    background-color: #34495E;
     font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
     padding: 20px;
     box-sizing: border-box;
@@ -115,24 +188,24 @@ html, body {
     margin-top: 20px;
     font-size: 2.2em;
     font-weight: bold;
-    color: #1B2631;
+    color: #fff;
     font-family: 'Arial', sans-serif;
 }
 
 .center-message {
     font-size: 20px;
     line-height: 1.5;
-    color: #1B2631;
+    color: #fff;
     margin: 5vh 0 5vh 0;
     text-align: center;
     font-family: 'Arial', sans-serif;
 }
 
 .btn-start-now {
+    position: relative;
     background: none;
     border: none;
-    color: #008080;
-    text-decoration: underline;
+    color: #3498DB;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
@@ -141,8 +214,25 @@ html, body {
     transition: color 0.3s ease;
 }
 
+.btn-start-now::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3498DB;
+    transition: all 0.2s ease;
+    transform: translateX(-50%);
+}
+
 .btn-start-now:hover {
-    color: #2F4F4F;
+    color: #2980B9;
+}
+
+.btn-start-now:hover::after {
+    width: 100%;
+    background-color: #2980B9;
 }
 
 .btn-container {
@@ -250,7 +340,7 @@ html, body {
     background-color: #45a049;
 }
 
-#closeTodoFormButton {
+.brn-close-form {
     color: #aaa;
     font-size: 36px;
     font-weight: bold;
@@ -260,8 +350,8 @@ html, body {
     right: 10px;
 }
 
-#closeTodoFormButton:hover,
-#closeTodoFormButton:focus {
+.brn-close-form:hover,
+.brn-close-form:focus {
     color: black;
     text-decoration: none;
 }
@@ -269,7 +359,6 @@ html, body {
 .todo-items {
     display: grid;
     max-width: 800px;
-    margin: 30px auto;
 }
 
 .todo-item-description,
@@ -331,7 +420,6 @@ html, body {
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
-    /*flex-basis: 100px;*/
     flex: 1 0 55px;
 }
 
@@ -380,7 +468,6 @@ html, body {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 30px 0;
         flex-shrink: 0;
     }
 
@@ -389,5 +476,12 @@ html, body {
         bottom: auto;
         right: auto;
         margin: 0;
+    }
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
     }
 }

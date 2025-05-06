@@ -4,16 +4,20 @@ import displayItemsDiv from "./components/displayItemsDiv.js";
 
 // Select and create DOM elements
 const btnOpenModal = document.querySelector('.btn-open-form');
-const btnCloseModal = document.querySelector('#closeTodoFormButton')
+const btnCloseModal = document.querySelector('.btn-close-form')
 const btnAddNewItem = document.querySelector('.btn-add-todo-item')
 const modalForm = document.querySelector('.modal');
-const searchInput = document.querySelector('#searchbox');
-const sortByMenu = document.querySelector('.sort-items-by-type');
+const searchInput = document.querySelector('.search-input');
+const dropdown = document.querySelector('.dropdown');
+const toggle = dropdown.querySelector('.dropdown-toggle');
+const menu = dropdown.querySelector('.dropdown-menu');
+const options = dropdown.querySelectorAll('.dropdown-menu li');
 const btnStartNow = document.querySelector('.btn-start-now');
 const welcomeSection = document.querySelector('.welcome-section')
 const sectionDisplayItems = document.querySelector('.todo-items');
 const clearItems = () => document.querySelector('.todo-items').innerHTML = '';
 const getDisplayDescription = () => document.querySelector('.todo-item-description');
+const searchButton = document.querySelector('.search-button');
 
 // Retrieve or initialize list items
 let listItems = JSON.parse(localStorage.getItem('todoItems')) || [];
@@ -69,7 +73,7 @@ function displayItems(items = listItems) {
                         if (divDisplayItemsElement.classList.contains('todo-item-remove')) {
                             listItems.splice(index, 1);
                             localStorage.setItem('todoItems', JSON.stringify(listItems));
-                            divDisplayItemsElement.remove(); // Remove the item from the DOM directly
+                            divDisplayItemsElement.remove();
 
                             // If there are no more items, remove the Description div and display the welcome message
                             if (listItems.length === 0) {
@@ -154,9 +158,9 @@ window.addEventListener('load', () => {
     displayItems();
     const selectedSort = localStorage.getItem('selectedSort');
     if (selectedSort) {
-        sortByMenu.value = selectedSort;
+        dropdown.value = selectedSort;
         const event = new Event('change');
-        sortByMenu.dispatchEvent(event);
+        dropdown.dispatchEvent(event);
     }
     if (localStorage.getItem('hideWelcome') === 'true') {
         welcomeSection.classList.add('hidden');
@@ -213,7 +217,7 @@ searchInput.addEventListener('input', (e) => {
 });
 
 // Event listener for sort menu
-sortByMenu.addEventListener('change', (e) => {
+dropdown.addEventListener('change', (e) => {
     const sortValue = e.target.value;
     let sortedItems;
     if (sortValue === 'date') {
@@ -252,5 +256,96 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('click', (e) => {
     if (e.target === modalForm) {
         modalForm.classList.add('hidden');
+    }
+});
+
+// Search button ripple effect
+searchButton.addEventListener('click', function (e) {
+    const circle = document.createElement('span');
+    circle.classList.add('ripple');
+
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    circle.style.width = circle.style.height = `${size}px`;
+
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
+    circle.style.left = `${x}px`;
+    circle.style.top = `${y}px`;
+
+    this.appendChild(circle);
+
+    circle.addEventListener('animationend', () => {
+        circle.remove();
+    });
+});
+
+let currentIndex = -1;
+
+// Toggle dropdown with mouse
+toggle.addEventListener('click', () => {
+    const isOpen = dropdown.classList.toggle('open');
+    menu.style.display = isOpen ? 'block' : 'none';
+
+    if (isOpen && options.length > 0) {
+        currentIndex = 0;
+        options[currentIndex].focus();
+    }
+});
+
+// Toggle dropdown with keyboard
+toggle.addEventListener('keydown', (e) => {
+    if (['ArrowDown', 'Enter', ' '].includes(e.key)) {
+        e.preventDefault();
+        const isOpen = dropdown.classList.toggle('open');
+        menu.style.display = isOpen ? 'block' : 'none';
+
+        if (isOpen && options.length > 0) {
+            currentIndex = 0;
+            options[currentIndex].focus();
+        }
+    }
+});
+
+options.forEach((option, index) => {
+    // Handle click
+    option.addEventListener('click', () => {
+        toggle.textContent = option.textContent;
+        toggle.dataset.value = option.dataset.value;
+        menu.style.display = 'none';
+        dropdown.classList.remove('open');
+        toggle.focus();
+    });
+
+    // Handle key navigation
+    option.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            currentIndex = (index + 1) % options.length;
+            options[currentIndex].focus();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            currentIndex = (index - 1 + options.length) % options.length;
+            options[currentIndex].focus();
+        }  else if (e.key === 'Enter') {
+            e.preventDefault();
+            toggle.textContent = option.textContent;
+            toggle.dataset.value = option.dataset.value;
+            menu.style.display = 'none';
+            dropdown.classList.remove('open');
+            toggle.focus();
+        } else if (e.key === 'Escape') {
+            menu.style.display = 'none';
+            dropdown.classList.remove('open');
+            toggle.focus();
+        }
+    });
+});
+
+// Close when clicking outside
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+        menu.style.display = 'none';
+        dropdown.classList.remove('open');
     }
 });
