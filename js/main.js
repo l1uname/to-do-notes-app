@@ -3,7 +3,7 @@ import displayDescriptionDiv from "./components/displayDescriptionDiv.js"
 import displayItemsDiv from "./components/displayItemsDiv.js";
 
 // Select and create DOM elements
-const btnOpenModal = document.querySelector('.btn-open-form');
+const btnOpenModal = document.querySelector('.btn-cta');
 const btnCloseModal = document.querySelector('.btn-close-form')
 const btnAddNewItem = document.querySelector('.btn-add-todo-item')
 const modalForm = document.querySelector('.modal');
@@ -18,6 +18,7 @@ const sectionDisplayItems = document.querySelector('.todo-items');
 const clearItems = () => document.querySelector('.todo-items').innerHTML = '';
 const getDisplayDescription = () => document.querySelector('.todo-item-description');
 const searchButton = document.querySelector('.search-button');
+const dateInput = document.querySelectorAll('.date-item');
 
 // Retrieve or initialize list items
 let listItems = JSON.parse(localStorage.getItem('todoItems')) || [];
@@ -84,8 +85,8 @@ function displayItems(items = listItems) {
                                 welcomeSection.classList.remove('hidden');
                             }
                         }
-                    }, 2500);
-                }, 1000);
+                    }, 1200);
+                }, 300);
 
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
@@ -308,7 +309,6 @@ toggle.addEventListener('keydown', (e) => {
 });
 
 options.forEach((option, index) => {
-    // Handle click
     option.addEventListener('click', () => {
         toggle.textContent = option.textContent;
         toggle.dataset.value = option.dataset.value;
@@ -317,27 +317,32 @@ options.forEach((option, index) => {
         toggle.focus();
     });
 
-    // Handle key navigation
     option.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            currentIndex = (index + 1) % options.length;
-            options[currentIndex].focus();
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            currentIndex = (index - 1 + options.length) % options.length;
-            options[currentIndex].focus();
-        }  else if (e.key === 'Enter') {
-            e.preventDefault();
-            toggle.textContent = option.textContent;
-            toggle.dataset.value = option.dataset.value;
-            menu.style.display = 'none';
-            dropdown.classList.remove('open');
-            toggle.focus();
-        } else if (e.key === 'Escape') {
-            menu.style.display = 'none';
-            dropdown.classList.remove('open');
-            toggle.focus();
+        e.preventDefault();
+
+        switch (e.key) {
+            case 'ArrowDown':
+                currentIndex = (index + 1) % options.length;
+                options[currentIndex].focus();
+                break;
+            case 'ArrowUp':
+                currentIndex = (index - 1 + options.length) % options.length;
+                options[currentIndex].focus();
+                break;
+            case 'Enter':
+                toggle.textContent = option.textContent;
+                toggle.dataset.value = option.dataset.value;
+                menu.style.display = 'none';
+                dropdown.classList.remove('open');
+                toggle.focus();
+                break;
+            case 'Escape':
+                menu.style.display = 'none';
+                dropdown.classList.remove('open');
+                toggle.focus();
+                break;
+            default:
+                e.preventDefault();
         }
     });
 });
@@ -349,3 +354,9 @@ document.addEventListener('click', (e) => {
         dropdown.classList.remove('open');
     }
 });
+
+dateInput.forEach((input) => {
+    input.addEventListener('click', function() {
+        this.showPicker();
+    });
+})

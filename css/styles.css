@@ -1,5 +1,7 @@
 :root {
-    --focus-color: #3498DB
+    --focus-color: #3498DB;
+    --primary-color: #2C3E50;
+    --secondary-color: #34495E;
 }
 
 * {
@@ -9,12 +11,21 @@
 }
 
 body {
-    background-color: #2C3E50;
+    background-color: var(--primary-color);
 }
 
 html, body {
     min-height: 100vh;
     overflow-x: hidden;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    height: calc(100vh - 80px);
 }
 
 .navbar {
@@ -112,11 +123,10 @@ html, body {
 .dropdown-toggle {
     background: #fff;
     color: #212121;
-    border: 2px solid #34495E;
+    border: 2px solid var(--secondary-color);
     padding: 10px 40px 10px 10px;
     font-size: 16px;
     cursor: pointer;
-    width: 200px;
     text-align: left;
     position: relative;
     border-radius: 5px;
@@ -130,7 +140,7 @@ html, body {
     transform: translateY(-50%);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #34495E;
+    border-top: 6px solid var(--secondary-color);
 }
 
 .dropdown-menu {
@@ -138,7 +148,7 @@ html, body {
     top: 40px;
     left: 0;
     background: #fff;
-    border: 2px solid #34495E;
+    border: 2px solid var(--secondary-color);
     border-top: none;
     width: 100%;
     list-style: none;
@@ -174,8 +184,8 @@ html, body {
     align-items: center;
     text-align: center;
     color: #fff;
-    background-color: #34495E;
-    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+    background-color: var(--secondary-color);
+    width: 100%;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -241,27 +251,31 @@ html, body {
     right: 20px;
 }
 
-.btn-open-form {
-    margin: 0 20px 20px 0;
+.btn-cta-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: auto;
+}
+
+.btn-cta {
     background-color: #4CAF50;
     border: none;
     border-radius: 50%;
-    bottom: 1vh;
-    right: 1vh;
     color: #FFFFFF;
     cursor: pointer;
     height: 70px;
     width: 70px;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 20px;
     font-size: 36px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
 }
 
-.btn-open-form:hover {
+.btn-cta:hover {
     background-color: #45a049;
     box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
     transform: translateY(-7px);
@@ -294,9 +308,61 @@ html, body {
     position: relative;
 }
 
+.btn-close-form {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #333;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-close-form:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #000;
+    outline: none;
+}
+
 .todo-form {
+    font-family: "Segoe UI", sans-serif;
     display: grid;
-    gap: 10px;
+    gap: 12px;
+
+    #date,
+    #priority,
+    #time {
+        padding: 10px;
+        min-height: 44px;
+        -webkit-user-select: none; /* Safari/Chrome */
+        -moz-user-select: none;    /* Firefox */
+        -ms-user-select: none;     /* IE/Edge */
+        user-select: none;
+    }
+
+    #date:active {
+        color: inherit;
+        background-color: transparent;
+    }
+
+    .todo-form-item:focus {
+        border: 2px solid var(--focus-color);
+        outline: none;
+        resize: none;
+    }
+}
+
+.todo-form p {
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .todo-form label {
@@ -358,20 +424,19 @@ html, body {
 
 .todo-items {
     display: grid;
-    max-width: 800px;
+    max-width: 1200px;
+    padding: 0 20px;
 }
 
 .todo-item-description,
 .todo-item {
     display: grid;
-    /*grid-template-columns: 1fr 2fr 2fr 3fr 2fr;*/
     grid-template-columns: minmax(50px, 1.1fr) minmax(50px, 1fr) minmax(70px, 1.5fr) minmax(100px, 4fr) minmax(30px, 1.8fr);
     gap: 5px;
     align-items: start;
-    /*justify-items: center;*/
     padding: 15px;
     border: 1px solid grey;
-    background-color: #2C3E50;
+    background-color: var(--primary-color);
 }
 
 .todo-item-description {
@@ -460,28 +525,24 @@ html, body {
     right: 20px;
 }
 
-@media (max-width: 1040px) {
-    .btn-container {
-        position: static;
-        right: auto;
-        top: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-    }
-
-    .btn-open-form {
-        display: flex;
-        bottom: auto;
-        right: auto;
-        margin: 0;
-    }
-}
-
 @keyframes ripple-animation {
     to {
         transform: scale(4);
         opacity: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .controls-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .dropdown {
+        order: 1;
+    }
+
+    .search-container {
+        order: 2
     }
 }

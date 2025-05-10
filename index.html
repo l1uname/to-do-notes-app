@@ -45,21 +45,21 @@
         <div class="modal-content">
             <span class="btn-close-form">&times;</span>
             <form class="todo-form">
-                <label for="date">Choose a date:</label>
-                <input id="date" name="date" required type="date">
+                <p>Choose a date:</p>
+                <input class="todo-form-item date-item" id="date" name="date" required type="date">
 
-                <label for="time">Choose a time:</label>
-                <input id="time" name="time" required type="time">
+                <p>Choose a time:</p>
+                <input class="todo-form-item date-item" id="time" name="time" required type="time">
 
-                <label for="priority">Choose a priority:</label>
-                <select id="priority" name="priority" required>
+                <p>Choose a priority:</p>
+                <select class="todo-form-item" id="priority" name="priority" required>
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
                 </select>
 
-                <label for="description">Describe the to-do item:</label>
-                <textarea id="description" name="description" required></textarea>
+                <p>Describe the to-do item:</p>
+                <textarea class="todo-form-item" id="description" name="description" required></textarea>
 
                 <button class="btn-add-todo-item">Add Todo</button>
             </form>
@@ -76,8 +76,10 @@
     </div>
 
     <!-- Button adding new items -->
-    <div class="btn-open-form" id="openTodoFormButton">
-        <span>&plus;</span>
+    <div class="btn-cta-wrapper">
+        <div class="btn-cta" id="openTodoFormButton">
+            <span>&plus;</span>
+        </div>
     </div>
 </main>
 </body>
