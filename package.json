@@ -1,0 +1,24 @@
+{
+  "name": "to-do-notes-app",
+  "version": "1.0.0",
+  "description": "This is a simple Todo List application built with vanilla JavaScript. It allows users to add, edit, and remove todo items, and also provides features to sort and search the items.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js --mode=production",
+    "dev": "webpack serve --config webpack.config.js --mode=development",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  }
+}

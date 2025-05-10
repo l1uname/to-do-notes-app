@@ -1,6 +1,7 @@
 import clearForm from "./utils/clear-form.js";
 import displayDescriptionDiv from "./components/displayDescriptionDiv.js"
 import displayItemsDiv from "./components/displayItemsDiv.js";
+import '../css/styles.css';
 
 // Select and create DOM elements
 const btnOpenModal = document.querySelector('.btn-cta');

@@ -7,15 +7,6 @@ dist/
 # IDE and editor settings (e.g., WebStorm)
 .idea/
 
-# Package lock file (if you use npm)
-package-lock.json
-
-# npm package files (if you're using npm for package management)
-package.json
-
-# Webpack configuration
-webpack.config.js
-
 # Logs
 *.log
 

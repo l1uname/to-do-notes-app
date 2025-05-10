@@ -1,0 +1,45 @@
+name: Build and Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Setup SSH and Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_SG }}
+          REMOTE_USER: u1403-gkouevb8o8wn
+          REMOTE_HOST: ssh.debatebubble.com
+          REMOTE_PORT: 18765
+          REMOTE_DIR: ~/www/notes.debatebubble.com/public_html
+        run: |
+          echo "$SSH_PRIVATE_KEY" > key.pem
+          chmod 600 key.pem
+
+          eval "$(ssh-agent -s)"
+          ssh-add key.pem
+
+          mkdir -p ~/.ssh
+          ssh-keyscan -p $REMOTE_PORT $REMOTE_HOST >> ~/.ssh/known_hosts
+
+          rsync -avz --delete -e "ssh -p $REMOTE_PORT -i key.pem" dist/ $REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR
