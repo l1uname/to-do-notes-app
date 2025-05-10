@@ -10,6 +10,7 @@ const btnAddNewItem = document.querySelector('.btn-add-todo-item')
 const modalForm = document.querySelector('.modal');
 const searchInput = document.querySelector('.search-input');
 const dropdown = document.querySelector('.dropdown');
+const dropdownItems = dropdown.querySelectorAll('li');
 const toggle = dropdown.querySelector('.dropdown-toggle');
 const menu = dropdown.querySelector('.dropdown-menu');
 const options = dropdown.querySelectorAll('.dropdown-menu li');
@@ -219,34 +220,33 @@ searchInput.addEventListener('input', (e) => {
 });
 
 // Event listener for sort menu
-dropdown.addEventListener('change', (e) => {
-    const sortValue = e.target.value;
-    let sortedItems;
-    if (sortValue === 'date') {
-        sortedItems = [...listItems].sort((a, b) => {
-            const dateA = new Date(a.date.split('-').join(','));
-            const dateB = new Date(b.date.split('-').join(','));
-            return dateB - dateA;
-        });
-    } else if (sortValue === 'priority') {
-        sortedItems = [...listItems].sort((a, b) => {
-            const priorityValues = {
-                'high': 3,
-                'medium': 2,
-                'low': 1
-            };
-            return priorityValues[b.priority.toLowerCase()] - priorityValues[a.priority.toLowerCase()];
-        });
-    } else if (sortValue === 'time') {
-        sortedItems = [...listItems].sort((a, b) => {
-            return b.time.localeCompare(a.time);
-        });
-    }
-    displayItems(sortedItems);
+dropdownItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+        const sortValue = e.target.getAttribute('data-value');
 
-    // Save the selected sort option in the localStorage
-    localStorage.setItem('selectedSort', sortValue);
+        let sortedItems;
+        if (sortValue === 'date') {
+            sortedItems = [...listItems].sort((a, b) => {
+                const dateA = new Date(a.date.split('-').join(','));
+                const dateB = new Date(b.date.split('-').join(','));
+                return dateB - dateA;
+            });
+        } else if (sortValue === 'priority') {
+            sortedItems = [...listItems].sort((a, b) => {
+                const priorityValues = {
+                    'high': 3,
+                    'medium': 2,
+                    'low': 1
+                };
+                return priorityValues[b.priority.toLowerCase()] - priorityValues[a.priority.toLowerCase()];
+            });
+        }
+        displayItems(sortedItems);
+
+        localStorage.setItem('selectedSort', sortValue);
+    });
 });
+
 
 // Event listener for Escape key
 document.addEventListener('keydown', (e) => {
